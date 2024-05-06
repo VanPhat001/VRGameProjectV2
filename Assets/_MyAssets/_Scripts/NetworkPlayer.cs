@@ -2,7 +2,7 @@ using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
-public class NetworkPlayer : NetworkBehaviour
+public class NetworkPlayer : NetworkBehaviour, IDamageable
 {
     [SerializeField] private Transform _origin;
     [SerializeField] private Transform _head;
@@ -63,5 +63,9 @@ public class NetworkPlayer : NetworkBehaviour
         _rightHand = this.transform.GetChild(2);
 
         _isPlayerReady = true;
+    }
+
+    public void GetHit()
+    {
     }
 }
