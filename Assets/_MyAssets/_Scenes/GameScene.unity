@@ -1044,7 +1044,7 @@ GameObject:
   - component: {fileID: 48294055}
   - component: {fileID: 48294054}
   - component: {fileID: 48294052}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6425,6 +6425,69 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 306626099}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &306961709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 306961711}
+  - component: {fileID: 306961710}
+  m_Layer: 0
+  m_Name: Nav Mesh Surface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &306961710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306961709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 92c0e6cdccfd742818e3487a5809503d, type: 2}
+  m_BuildHeightMesh: 0
+--- !u!4 &306961711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306961709}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &308131104
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9614,7 +9677,7 @@ GameObject:
   - component: {fileID: 534390346}
   - component: {fileID: 534390345}
   - component: {fileID: 534390344}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Local Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15949,7 +16012,7 @@ GameObject:
   - component: {fileID: 908962874}
   - component: {fileID: 908962873}
   - component: {fileID: 908962871}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21489,7 +21552,7 @@ GameObject:
   - component: {fileID: 1263578254}
   - component: {fileID: 1263578255}
   - component: {fileID: 1263578253}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22335,7 +22398,7 @@ GameObject:
   - component: {fileID: 1288048298}
   - component: {fileID: 1288048299}
   - component: {fileID: 1288048297}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25093,6 +25156,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: pistol2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8f9696fb6017be144a307b6586855ac0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3451118302482216456, guid: 8f9696fb6017be144a307b6586855ac0,
         type: 3}
@@ -32793,7 +32861,7 @@ GameObject:
   - component: {fileID: 2018994835}
   - component: {fileID: 2018994834}
   - component: {fileID: 2018994833}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -34742,7 +34810,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2134948401}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera Offset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34947,3 +35015,4 @@ SceneRoots:
   - {fileID: 1932200252}
   - {fileID: 534390352}
   - {fileID: 1472314998}
+  - {fileID: 306961711}
