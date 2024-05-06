@@ -23,7 +23,7 @@ public class HomeMenuManager : MonoBehaviour
     void Start()
     {
         _startGameButton.onClick.AddListener(StartGameAsync);
-        _joinGameButton.onClick.AddListener(JoinGame);
+        _joinGameButton.onClick.AddListener(JoinGameAsync);
         _quitButton.onClick.AddListener(QuitGame);
         _quittingYesButton.onClick.AddListener(OnYesButtonClicked);
         _quittingNoButton.onClick.AddListener(OnNoButtonClicked);
@@ -52,7 +52,7 @@ public class HomeMenuManager : MonoBehaviour
         Loader.LoadScene(Loader.SceneName.LobbyScene);
     }
 
-    private async void JoinGame()
+    private async void JoinGameAsync()
     {
         ActiveLoadingUI();
 
