@@ -36,7 +36,7 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable
             UpdateHealthbar();
         };
 
-        UpdatePlayerName();
+        // UpdatePlayerName();
         _netPlayerName.OnValueChanged += (_, _) =>
         {
             UpdatePlayerName();
@@ -90,7 +90,7 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable
         _leftNetworkHand = _leftHand.GetComponent<NetworkHand>();
         _rightNetworkHand = _rightHand.GetComponent<NetworkHand>();
         _networkHead = _head.GetComponent<NetworkHead>();
-        
+
         if (IsOwner)
         {
             _netPlayerName.Value = GameData.PlayerName;
@@ -128,7 +128,8 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable
 
     public void ServerGetHit(float damage)
     {
-        _netHP.Value = Mathf.Clamp(HP - damage, 0, 100);
+        _netHP.Value = Mathf.Clamp(_netHP.Value - damage, 0, 100);
+        Debug.Log("ClientId " + OwnerClientId + " HP " + _netHP.Value);
         UpdateHealthbar();
     }
 }

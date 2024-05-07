@@ -43,7 +43,7 @@ namespace WarZombie
             }
 
             var damageable = collider.transform.GetComponent<IDamageable>();
-            damageable.ServerGetHit(Manager.AttackDamage);
+            damageable?.ServerGetHit(Manager.AttackDamage);
         }
     }
 }

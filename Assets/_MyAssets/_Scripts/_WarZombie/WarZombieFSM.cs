@@ -1,7 +1,7 @@
 public class WarZombieFSM : BaseFSM
 {
     public WarZombieManager Manager { get; private set; }
-    const float ATTACK_RANGE = 2;
+    const float ATTACK_RANGE = 3;
     // const float FOLLOW_RANGE = 100;
 
     public WarZombieFSM(WarZombieManager manager)

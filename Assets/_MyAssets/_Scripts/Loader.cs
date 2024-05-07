@@ -5,7 +5,7 @@ public class Loader
 {
     public enum SceneName
     {
-        HomeScene, LobbyScene, GameScene
+        HomeScene, LobbyScene, GameScene, HelpScene
     }
 
     public static void LoadScene(SceneName sceneName)

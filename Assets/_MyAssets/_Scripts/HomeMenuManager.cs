@@ -1,10 +1,14 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HomeMenuManager : MonoBehaviour
 {
+    [SerializeField] private TMP_InputField _playerNameInput;
     [SerializeField] private Button _startGameButton;
     [SerializeField] private Button _joinGameButton;
+    [SerializeField] private Button _helpButton;
 
     [Header("Normal UI")]
     [SerializeField] private GameObject _normalUI;
@@ -26,10 +30,21 @@ public class HomeMenuManager : MonoBehaviour
         _quitButton.onClick.AddListener(QuitGame);
         _quittingYesButton.onClick.AddListener(OnYesButtonClicked);
         _quittingNoButton.onClick.AddListener(OnNoButtonClicked);
+        _helpButton.onClick.AddListener(OpenHelpScene);
 
         GameData.PlayerName = "Player" + UnityEngine.Random.Range(0, 1000);
+        SetPlayerNameInput(GameData.PlayerName);
     }
 
+    private void SetPlayerNameInput(string text)
+    {
+        _playerNameInput.text = text;
+    }
+
+    private string GetPlayerNameInput()
+    {
+        return _playerNameInput.text;
+    }
 
     private async void StartGameAsync()
     {
@@ -43,13 +58,8 @@ public class HomeMenuManager : MonoBehaviour
             return;
         }
 
-        // if (!NetworkManager.Singleton.StartHost())
-        // {
-        //     ActiveLoadingUI(false);
-        //     Debug.Log("Can't Start Host!!!");
-        //     return;
-        // }
         GameData.IsClient = false;
+        GameData.PlayerName = GetPlayerNameInput();
         Loader.LoadScene(Loader.SceneName.LobbyScene);
     }
 
@@ -65,14 +75,8 @@ public class HomeMenuManager : MonoBehaviour
             return;
         }
 
-        // if (!NetworkManager.Singleton.StartClient())
-        // {
-        //     ActiveLoadingUI(false);
-        //     Debug.Log("Can't Start Client!!!");
-        //     return;
-        // }
-
         GameData.IsClient = true;
+        GameData.PlayerName = GetPlayerNameInput();
         Loader.LoadScene(Loader.SceneName.LobbyScene);
     }
 
@@ -95,6 +99,10 @@ public class HomeMenuManager : MonoBehaviour
         ActiveNormalUI();
     }
 
+    private void OpenHelpScene()
+    {
+        Loader.LoadScene(Loader.SceneName.HelpScene);
+    }
 
     public void ActiveNormalUI(bool active = true)
     {
