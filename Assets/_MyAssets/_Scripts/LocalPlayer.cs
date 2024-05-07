@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using IngameDebugConsole;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -62,4 +63,37 @@ public class LocalPlayer : MonoBehaviour
             item.enabled = visible;
         }
     }
+
+
+
+    #region test
+    #if false
+    float _shootTime;
+    void Update()
+    {
+        if (!NetworkManager.Singleton.IsServer)
+        {
+            return;
+        }
+
+        if (Input.GetKey(KeyCode.Space) && Time.time >= _shootTime)
+        {
+            _shootTime = Time.time + .13f;
+            Shoot();
+        }
+    }
+
+    [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private Transform _firePoint;
+    void Shoot()
+    {
+        var bullet = Instantiate(_bulletPrefab);
+        bullet.GetComponent<Bullet>()?.ServerInit(
+            _firePoint.position - Vector3.up * .2f,
+            _firePoint.rotation,
+            _firePoint.forward * 30
+        );
+    }
+    #endif
+    #endregion
 }

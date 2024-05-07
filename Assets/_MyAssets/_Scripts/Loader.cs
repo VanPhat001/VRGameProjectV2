@@ -17,4 +17,9 @@ public class Loader
     {
         NetworkManager.Singleton.SceneManager.LoadScene(sceneName.ToString(), LoadSceneMode.Single);
     }
+
+    public static bool IsScene(SceneName sceneName)
+    {
+        return SceneManager.GetActiveScene().name.Equals(sceneName.ToString());
+    }
 }

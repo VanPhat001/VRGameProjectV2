@@ -1,7 +1,12 @@
+using Unity.Netcode;
+using UnityEngine;
+
 namespace WarZombie
 {
     public class DeathState : WarZombieFSM
     {
+        private float _timer;
+
         public DeathState(WarZombieManager manager) : base(manager)
         {}
 
@@ -9,12 +14,23 @@ namespace WarZombie
         {
             base.EnterState();
 
+            Manager.RightHand.SetEnabled(false);
+            Manager.gameObject.GetComponent<Collider>().enabled = false;
+
             Manager.Animator.SetBool(Manager.DeathParam, true);
+            _timer = 0;
         }
 
         public override void UpdateState()
         {
             base.UpdateState();
+
+            _timer += Time.deltaTime;
+            if (_timer >= 10)
+            {
+                // Object.Destroy(Manager.gameObject);
+                Manager.GetComponent<NetworkObject>().Despawn();
+            }
         }
 
         public override void ExitState()

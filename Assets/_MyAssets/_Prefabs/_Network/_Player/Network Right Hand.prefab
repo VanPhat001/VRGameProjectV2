@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 9188027061197059666}
   - component: {fileID: 4676266946700517842}
   - component: {fileID: 1674035100339500127}
+  - component: {fileID: 8433945157084922324}
   m_Layer: 0
   m_Name: Network Right Hand
   m_TagString: Untagged
@@ -58,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 7615432658220429215}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.06, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -117,6 +118,20 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &8433945157084922324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7615432658220429215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9870ed470fa49ad900a11132956dda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isLeftHand: 0
+  _gun: {fileID: 3384457206776288024}
 --- !u!1001 &46377297742210190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133,7 +148,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8f9696fb6017be144a307b6586855ac0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0568
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8f9696fb6017be144a307b6586855ac0,
         type: 3}
@@ -228,7 +243,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firePoint: {fileID: 4459384262588014443}
-  _ammoPrefab: {fileID: 0}
+  _ammoPrefab: {fileID: 7598086142637332891, guid: 2e0c97d16b309488cb404acf62f624f7,
+    type: 3}
   _ammoRate: 0.2
   _reloadTime: 2
   _ammoSpeed: 20

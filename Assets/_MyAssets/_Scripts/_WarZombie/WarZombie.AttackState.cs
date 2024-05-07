@@ -10,6 +10,7 @@ namespace WarZombie
             base.EnterState();
 
             Manager.Animator.SetBool(Manager.AttackParam, true);
+            Manager.RightHand.SetEnabled();
         }
 
         public override void UpdateState()
@@ -26,6 +27,8 @@ namespace WarZombie
         public override void ExitState()
         {
             base.ExitState();
+
+            Manager.RightHand.SetEnabled(false);
         }
     }
 }

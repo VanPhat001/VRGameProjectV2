@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class NetworkPlayer : NetworkBehaviour, IDamageable
 {
@@ -8,8 +9,12 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable
     [SerializeField] private Transform _head;
     [SerializeField] private Transform _leftHand;
     [SerializeField] private Transform _rightHand;
+    [SerializeField] private InputActionProperty _leftFireInput;
+    [SerializeField] private InputActionProperty _rightFireInput;
 
     private bool _isPlayerReady = false;
+    private NetworkHand _leftNetworkHand;
+    private NetworkHand _rightNetworkHand;
 
     public static NetworkPlayer Singleton { get; private set; }
 
@@ -36,6 +41,7 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable
         }
 
         SyncPlayerTransform();
+        Shoot();
     }
 
     private void SyncPlayerTransform()
@@ -62,10 +68,26 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable
         _leftHand = this.transform.GetChild(1);
         _rightHand = this.transform.GetChild(2);
 
+        _leftNetworkHand = _leftHand.GetComponent<NetworkHand>();
+        _rightNetworkHand = _rightHand.GetComponent<NetworkHand>();
+
         _isPlayerReady = true;
     }
 
-    public void GetHit()
+    private void Shoot()
+    {
+        if (_leftFireInput.action.ReadValue<float>() > 0)
+        {
+            _leftNetworkHand.Gun.Shoot();
+        }
+
+        if (_rightFireInput.action.ReadValue<float>() > 0)
+        {
+            _rightNetworkHand.Gun.Shoot();
+        }
+    }
+
+    public void ServerGetHit(float damage)
     {
     }
 }

@@ -5,11 +5,9 @@ using UnityEngine;
 public class Pistol : MonoBehaviour, IGun
 {
     [SerializeField] private Transform _firePoint;
-    [SerializeField] private GameObject _ammoPrefab;
     [SerializeField] private float _ammoRate;
     [SerializeField] private float _reloadTime = 2f;
     [SerializeField] private float _ammoSpeed;
-    [SerializeField] private float _ammoDamage;
     [SerializeField] private int _ammoRemain;
     [SerializeField] private int _ammoAvailable;
     [SerializeField] private int _ammoReloadNumber;
@@ -39,6 +37,18 @@ public class Pistol : MonoBehaviour, IGun
         ////////////
         ///shoot///
         ///////////
+        _ammoFireTimer = _ammoRate;
+        _ammoAvailable--;
+        NetworkCommunication.Singleton.SpawnBulletServerRpc(
+            _firePoint.position,
+            _firePoint.rotation,
+            _firePoint.forward.normalized * _ammoSpeed
+        );
+
+        if (_ammoAvailable <= 0 && _ammoRemain > 0)
+        {
+            Reload();
+        }
 
         return true;
     }
