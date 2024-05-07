@@ -2386,6 +2386,7 @@ MonoBehaviour:
   _target: {fileID: 0}
   _animator: {fileID: 564421857773180523}
   _agent: {fileID: 1646149868517910390}
+  _bodyCollider: {fileID: 6683465141343607051}
   _rightHand:
     _colliders:
     - {fileID: 902372561397193945}

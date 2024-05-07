@@ -11,6 +11,7 @@ public class WarZombieManager : NetworkBehaviour, IFSMManager<WarZombieFSM>, IDa
     [SerializeField] private Transform _target;
     [SerializeField] private Animator _animator;
     [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private Collider _bodyCollider;
     [SerializeField] private ColliderList _rightHand;
     [SerializeField] private Slider _healthbarSlider;
     [SerializeField] private float _attackDamage;
@@ -20,6 +21,7 @@ public class WarZombieManager : NetworkBehaviour, IFSMManager<WarZombieFSM>, IDa
     public Transform Target { get => _target; set => _target = value; }
     public Animator Animator { get => _animator; set => _animator = value; }
     public NavMeshAgent Agent { get => _agent; set => _agent = value; }
+    public Collider BodyCollider => _bodyCollider;
     public ColliderList RightHand => _rightHand;
     public bool IsDeath { get; set; } = false;
     public float HP => _netHP.Value;

@@ -15,7 +15,8 @@ namespace WarZombie
             base.EnterState();
 
             Manager.RightHand.SetEnabled(false);
-            Manager.gameObject.GetComponent<Collider>().enabled = false;
+            Manager.BodyCollider.enabled = false;
+            // Manager.gameObject.GetComponent<Collider>().enabled = false;
 
             Manager.Animator.SetBool(Manager.DeathParam, true);
             _timer = 0;

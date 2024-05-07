@@ -7,6 +7,7 @@ public class GameEnemySpawner : MonoBehaviour
     public static GameEnemySpawner Singleton { get; private set; }
 
     [SerializeField] private GameObject _warZombiePrefab;
+    [SerializeField] private GameObject _copZombiePrefab;
 
 
     void Start()
@@ -23,7 +24,7 @@ public class GameEnemySpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        ServerSpawnWarZombie();
+        ServerSpawnCopZombie();
     }
 
     public void ServerSpawnWarZombie()
@@ -32,6 +33,15 @@ public class GameEnemySpawner : MonoBehaviour
         zombie.transform.position = LocalPlayer.Singleton.Head.position + LocalPlayer.Singleton.Head.forward.normalized * 10;
         // zombie.GetComponent<WarZombieManager>().Target = LocalPlayer.Singleton.Head;
         zombie.GetComponent<WarZombieManager>().ServerChangeTarget();
+        zombie.GetComponent<NetworkObject>().Spawn();
+    }
+
+    public void ServerSpawnCopZombie()
+    {
+        var zombie = Instantiate(_copZombiePrefab);
+        zombie.transform.position = LocalPlayer.Singleton.Head.position + LocalPlayer.Singleton.Head.forward.normalized * 10;
+        // zombie.GetComponent<WarZombieManager>().Target = LocalPlayer.Singleton.Head;
+        zombie.GetComponent<CopZombieManager>().ServerChangeTarget();
         zombie.GetComponent<NetworkObject>().Spawn();
     }
 }

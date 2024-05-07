@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WarZombie
   - NetworkPlayer
+  - CopZombie
   layers:
   - Default
   - TransparentFX
