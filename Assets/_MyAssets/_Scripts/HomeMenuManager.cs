@@ -1,4 +1,3 @@
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +26,8 @@ public class HomeMenuManager : MonoBehaviour
         _quitButton.onClick.AddListener(QuitGame);
         _quittingYesButton.onClick.AddListener(OnYesButtonClicked);
         _quittingNoButton.onClick.AddListener(OnNoButtonClicked);
+
+        GameData.PlayerName = "Player" + UnityEngine.Random.Range(0, 1000);
     }
 
 

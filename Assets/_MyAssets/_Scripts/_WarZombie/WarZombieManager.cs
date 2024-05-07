@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,6 +13,8 @@ public class WarZombieManager : NetworkBehaviour, IFSMManager<WarZombieFSM>, IDa
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private ColliderList _rightHand;
     [SerializeField] private Slider _healthbarSlider;
+    [SerializeField] private float _attackDamage;
+    private NetworkVariable<float> _netHP = new NetworkVariable<float>(100);
 
     public WarZombieFSM CurrentState { get; set; }
     public Transform Target { get => _target; set => _target = value; }
@@ -17,8 +22,8 @@ public class WarZombieManager : NetworkBehaviour, IFSMManager<WarZombieFSM>, IDa
     public NavMeshAgent Agent { get => _agent; set => _agent = value; }
     public ColliderList RightHand => _rightHand;
     public bool IsDeath { get; set; } = false;
-    public NetworkVariable<float> netHP = new NetworkVariable<float>(100);
-    public float HP => netHP.Value;
+    public float HP => _netHP.Value;
+    public float AttackDamage => _attackDamage;
 
     public WarZombie.IdleState IdleState { get; private set; }
     public WarZombie.RunState RunState { get; private set; }
@@ -47,7 +52,8 @@ public class WarZombieManager : NetworkBehaviour, IFSMManager<WarZombieFSM>, IDa
         base.OnNetworkSpawn();
 
         UpdateHealthbar();
-        netHP.OnValueChanged += (oldVal, val) => {
+        _netHP.OnValueChanged += (oldVal, val) =>
+        {
             UpdateHealthbar();
         };
 
@@ -101,6 +107,16 @@ public class WarZombieManager : NetworkBehaviour, IFSMManager<WarZombieFSM>, IDa
         CurrentState.UpdateState();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!NetworkManager.Singleton.IsServer)
+        {
+            return;
+        }
+
+        CurrentState.OnTriggerEnter(other);
+    }
+
 
     public void UpdateHealthbar()
     {
@@ -109,12 +125,25 @@ public class WarZombieManager : NetworkBehaviour, IFSMManager<WarZombieFSM>, IDa
 
     public void ServerGetHit(float damage)
     {
-        netHP.Value = Mathf.Clamp(HP - damage, 0, 100);
+        _netHP.Value = Mathf.Clamp(HP - damage, 0, 100);
         UpdateHealthbar();
     }
 
-    void ServerChangeTarget()
+    public void ServerChangeTarget()
     {
+        var connectedClients = Multiplayer.Singleton.ConnectedClientDict;
 
+        // var index = UnityEngine.Random.Range(0, connectedClients.Keys.Count);
+        // var netPlayer = connectedClients.ElementAt(index).Value;
+        // Target = netPlayer.transform.GetChild(0).GetChild(0);
+
+        var keys = new List<ulong>(connectedClients.Keys);
+        var random = new System.Random();
+        keys = keys.OrderBy(x => random.Next()).ToList();
+        Target = connectedClients[keys[0]].transform.GetChild(0).GetChild(0);
+
+        // NetPlayer <netPlayer>
+        // |--> Head Container <child 0>
+        // |-->--> Head <child 0>
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,10 +12,15 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable
     [SerializeField] private Transform _rightHand;
     [SerializeField] private InputActionProperty _leftFireInput;
     [SerializeField] private InputActionProperty _rightFireInput;
+    private NetworkVariable<float> _netHP = new NetworkVariable<float>(100);
+    private NetworkVariable<FixedString128Bytes> _netPlayerName = new NetworkVariable<FixedString128Bytes>("[TEST] PlayerName", writePerm: NetworkVariableWritePermission.Owner);
+
+    public float HP => _netHP.Value;
 
     private bool _isPlayerReady = false;
     private NetworkHand _leftNetworkHand;
     private NetworkHand _rightNetworkHand;
+    private NetworkHead _networkHead;
 
     public static NetworkPlayer Singleton { get; private set; }
 
@@ -23,6 +29,19 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable
         base.OnNetworkSpawn();
 
         StartCoroutine(AttackPlayerBody());
+
+        UpdateHealthbar();
+        _netHP.OnValueChanged += (_, _) =>
+        {
+            UpdateHealthbar();
+        };
+
+        UpdatePlayerName();
+        _netPlayerName.OnValueChanged += (_, _) =>
+        {
+            UpdatePlayerName();
+        };
+
         if (IsOwner)
         {
             Singleton = this;
@@ -70,6 +89,16 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable
 
         _leftNetworkHand = _leftHand.GetComponent<NetworkHand>();
         _rightNetworkHand = _rightHand.GetComponent<NetworkHand>();
+        _networkHead = _head.GetComponent<NetworkHead>();
+        
+        if (IsOwner)
+        {
+            _netPlayerName.Value = GameData.PlayerName;
+        }
+        else
+        {
+            UpdatePlayerName();
+        }
 
         _isPlayerReady = true;
     }
@@ -87,7 +116,19 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable
         }
     }
 
+    public void UpdateHealthbar()
+    {
+        // no code
+    }
+
+    public void UpdatePlayerName()
+    {
+        _networkHead?.SetPlayerNameText(_netPlayerName.Value.ToString());
+    }
+
     public void ServerGetHit(float damage)
     {
+        _netHP.Value = Mathf.Clamp(HP - damage, 0, 100);
+        UpdateHealthbar();
     }
 }

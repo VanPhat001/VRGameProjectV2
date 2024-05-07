@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace WarZombie
 {
     public class AttackState : WarZombieFSM
@@ -29,6 +31,19 @@ namespace WarZombie
             base.ExitState();
 
             Manager.RightHand.SetEnabled(false);
+        }
+
+        public override void OnTriggerEnter(Collider collider)
+        {
+            base.OnTriggerEnter(collider);
+
+            if (!collider.gameObject.CompareTag("NetworkPlayer"))
+            {
+                return;
+            }
+
+            var damageable = collider.transform.GetComponent<IDamageable>();
+            damageable.ServerGetHit(Manager.AttackDamage);
         }
     }
 }

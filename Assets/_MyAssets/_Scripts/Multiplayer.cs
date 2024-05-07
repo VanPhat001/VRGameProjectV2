@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -24,6 +25,13 @@ public class Multiplayer : MonoBehaviour
 
     private readonly float SEND_HEART_BEAT_TIME = 15;
     public readonly string RELAY_JOIN_CODE = "RelayJoinCode";
+
+    private Dictionary<ulong, GameObject> _connectedClientDict = new ();
+    public Dictionary<ulong, GameObject> ConnectedClientDict 
+    {
+        get => _connectedClientDict;
+        set => _connectedClientDict = value;
+    } 
 
 
     void Awake()
@@ -196,5 +204,7 @@ public class Multiplayer : MonoBehaviour
         netHeadObj.TrySetParent(netPlayer);
         netLeftHandObj.TrySetParent(netPlayer);
         netRightHandObj.TrySetParent(netPlayer);
+
+        ConnectedClientDict.Add(clientId, netPlayer);
     }
 }

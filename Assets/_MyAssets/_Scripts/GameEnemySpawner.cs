@@ -30,7 +30,8 @@ public class GameEnemySpawner : MonoBehaviour
     {
         var zombie = Instantiate(_warZombiePrefab);
         zombie.transform.position = LocalPlayer.Singleton.Head.position + LocalPlayer.Singleton.Head.forward.normalized * 10;
-        zombie.GetComponent<WarZombieManager>().Target = LocalPlayer.Singleton.Head;
+        // zombie.GetComponent<WarZombieManager>().Target = LocalPlayer.Singleton.Head;
+        zombie.GetComponent<WarZombieManager>().ServerChangeTarget();
         zombie.GetComponent<NetworkObject>().Spawn();
     }
 }
