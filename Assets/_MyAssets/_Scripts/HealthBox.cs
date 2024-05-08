@@ -7,7 +7,7 @@ public class HealthBox : NetworkBehaviour
     [SerializeField] private float _healthAmount;
     [SerializeField] private Collider _collider;
     private NetworkVariable<bool> _netActive = new NetworkVariable<bool>(true);
-    private const float TRIGGER_RATE = 45;
+    private const float TRIGGER_RATE = 20;
 
     public override void OnNetworkSpawn()
     {
@@ -17,7 +17,7 @@ public class HealthBox : NetworkBehaviour
         _netActive.OnValueChanged += (_, val) => SetVisible(val);
     }
 
-    private IEnumerator TriggerNetActiveCoroutine()
+    private IEnumerator ServerTriggerNetActiveCoroutine()
     {
         _netActive.Value = false;
         yield return new WaitForSeconds(TRIGGER_RATE);
@@ -45,6 +45,6 @@ public class HealthBox : NetworkBehaviour
         var healable = other.transform.GetComponent<IHealable>();
         healable?.ServerHeal(_healthAmount);
 
-        StartCoroutine(TriggerNetActiveCoroutine());
+        StartCoroutine(ServerTriggerNetActiveCoroutine());
     }
 }

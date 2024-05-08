@@ -1,0 +1,24 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GameUIManager : MonoBehaviour
+{
+    [SerializeField] private Image _healthbarImage;
+    [SerializeField] private Text _healthbarText;
+
+    public static GameUIManager Singleton { get; private set; }
+
+    void Awake()
+    {
+        Singleton = this;
+    }
+
+    /// <summary>
+    /// hp in [0..100]
+    /// </summary>
+    public void SetHealthbarValue(float hp)
+    {
+        _healthbarImage.fillAmount = hp / 100f;
+        _healthbarText.text = hp.ToString();
+    }
+}

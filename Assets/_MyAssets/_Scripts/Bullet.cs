@@ -40,6 +40,13 @@ public class Bullet : NetworkBehaviour
 
     void ServerRelease()
     {
-        GetComponent<NetworkObject>().Despawn();
+        try
+        {
+            GetComponent<NetworkObject>().Despawn();
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e);
+        }
     }
 }

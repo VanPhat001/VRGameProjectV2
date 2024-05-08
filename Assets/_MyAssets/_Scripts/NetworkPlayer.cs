@@ -50,6 +50,9 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
         LocalPlayer.Singleton.VisibleCharacterRenderer(false);
     }
 
+    private void Start() {
+        UpdateHealthbar();
+    }
 
 
     private void Update()
@@ -123,7 +126,10 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
 
     public void UpdateHealthbar()
     {
-        // no code
+        if (NetworkManager.Singleton.LocalClientId == OwnerClientId)
+        {
+            GameUIManager.Singleton.SetHealthbarValue(HP);
+        }
     }
 
     public void UpdatePlayerName()
