@@ -108,7 +108,7 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
 
     private void Shoot()
     {
-        if (!Loader.IsScene(Loader.SceneName.GameScene))
+        if (!Loader.IsScene(Loader.SceneName.GameScene) || HP <= 0)
         {
             return;
         }

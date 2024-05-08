@@ -47,8 +47,10 @@ namespace Skeleton
         {
             base.ExitState();
 
+            Manager.ServerRevive(75);
             Manager.Animator.SetBool(Manager.StunParam, false);
             Manager.Animator.ResetTrigger(Manager.StunTriggerParam);
+            Manager.IsDeath = false;
 
             Manager.ServerChangeTarget();
             Manager.BodyCollider.enabled = true;

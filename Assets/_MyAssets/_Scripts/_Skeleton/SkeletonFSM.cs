@@ -39,22 +39,19 @@ public class SkeletonFSM : BaseFSM
 
     protected void PerformAttack()
     {
-        if (Manager.Agent.remainingDistance > 1.3f)
+        switch (UnityEngine.Random.Range(0, 3))
         {
-            ChangeState(Manager.Skill1State);
-        }
-        else
-        {
-            switch (UnityEngine.Random.Range(0, 2))
-            {
-                case 0:
-                    ChangeState(Manager.KickState);
-                    break;
+            case 0:
+                ChangeState(Manager.KickState);
+                break;
 
-                case 1:
-                    ChangeState(Manager.Skill2State);
-                    break;
-            }
+            case 1:
+                ChangeState(Manager.Skill1State);
+                break;
+
+            case 2:
+                ChangeState(Manager.Skill2State);
+                break;
         }
     }
 

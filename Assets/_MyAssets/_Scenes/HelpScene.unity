@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.009483724, g: 0.0050141304, b: 0.009977762, a: 1}
+  m_IndirectSpecularColor: {r: 0.009499185, g: 0.004962067, b: 0.010043007, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3226,6 +3226,54 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &1166527803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1166527804}
+  - component: {fileID: 1166527805}
+  m_Layer: 0
+  m_Name: Demo Item (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1166527804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166527803}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 9097781497269596397}
+  m_Father: {fileID: 1698600387}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1166527805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166527803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5b2aa6adeb44b2b8235697160078b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _zombiePrefab: {fileID: 7604866190860008418}
+  _name: Humanity Reconstructed Skeleton
+  _description: Skeleton
 --- !u!1 &1231262516
 GameObject:
   m_ObjectHideFlags: 0
@@ -3764,6 +3812,7 @@ Transform:
   m_Children:
   - {fileID: 1944163026}
   - {fileID: 1043073376}
+  - {fileID: 1166527804}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 145, z: 0}
 --- !u!114 &1698600388
@@ -5213,6 +5262,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2049708543}
   m_CullTransparentMesh: 1
+--- !u!1001 &1487075977454793181
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1166527804}
+    m_Modifications:
+    - target: {fileID: 2557191682744655522, guid: d60221649ff0d493d88f47e2527c1f9a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557191682744655522, guid: d60221649ff0d493d88f47e2527c1f9a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557191682744655522, guid: d60221649ff0d493d88f47e2527c1f9a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557191682744655522, guid: d60221649ff0d493d88f47e2527c1f9a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557191682744655522, guid: d60221649ff0d493d88f47e2527c1f9a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557191682744655522, guid: d60221649ff0d493d88f47e2527c1f9a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557191682744655522, guid: d60221649ff0d493d88f47e2527c1f9a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557191682744655522, guid: d60221649ff0d493d88f47e2527c1f9a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557191682744655522, guid: d60221649ff0d493d88f47e2527c1f9a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557191682744655522, guid: d60221649ff0d493d88f47e2527c1f9a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468734121709372619, guid: d60221649ff0d493d88f47e2527c1f9a,
+        type: 3}
+      propertyPath: m_Name
+      value: Demo_Skeleton
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d60221649ff0d493d88f47e2527c1f9a, type: 3}
 --- !u!4 &1992919009560433361 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3563126712362299471, guid: f218b71c0f26d4a00978de9d591ca171,
@@ -5323,6 +5440,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demo_CopZombie
       objectReference: {fileID: 0}
+    - target: {fileID: 86711793266034818, guid: f218b71c0f26d4a00978de9d591ca171,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3563126712362299471, guid: f218b71c0f26d4a00978de9d591ca171,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5378,6 +5500,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f218b71c0f26d4a00978de9d591ca171, type: 3}
+--- !u!1 &7604866190860008418 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6468734121709372619, guid: d60221649ff0d493d88f47e2527c1f9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1487075977454793181}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9097781497269596397 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2557191682744655522, guid: d60221649ff0d493d88f47e2527c1f9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1487075977454793181}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

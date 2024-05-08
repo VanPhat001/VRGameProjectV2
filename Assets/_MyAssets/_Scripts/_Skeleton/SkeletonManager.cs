@@ -159,6 +159,11 @@ public class SkeletonManager : NetworkBehaviour, IFSMManager<SkeletonFSM>, IDama
         UpdateHealthbar();
     }
 
+    public void ServerRevive(float hp)
+    {
+        _netHP.Value = hp;
+    }
+
     public void ServerChangeTarget()
     {
         var connectedClients = Multiplayer.Singleton.ConnectedClientDict;
