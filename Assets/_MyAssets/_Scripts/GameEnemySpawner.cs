@@ -8,6 +8,7 @@ public class GameEnemySpawner : MonoBehaviour
 
     [SerializeField] private GameObject _warZombiePrefab;
     [SerializeField] private GameObject _copZombiePrefab;
+    [SerializeField] private GameObject _healthBoxPrefab;
 
 
     void Start()
@@ -17,6 +18,7 @@ public class GameEnemySpawner : MonoBehaviour
             return;
         }
 
+        ServerSpawnHealthBox();
         StartCoroutine(ServerSpawnCoroutine());
     }
 
@@ -43,5 +45,11 @@ public class GameEnemySpawner : MonoBehaviour
         // zombie.GetComponent<WarZombieManager>().Target = LocalPlayer.Singleton.Head;
         zombie.GetComponent<CopZombieManager>().ServerChangeTarget();
         zombie.GetComponent<NetworkObject>().Spawn();
+    }
+
+    public void ServerSpawnHealthBox()
+    {
+        var healthBox = Instantiate(_healthBoxPrefab);
+        healthBox.GetComponent<NetworkObject>().Spawn();
     }
 }

@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class NetworkPlayer : NetworkBehaviour, IDamageable
+public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
 {
     [SerializeField] private Transform _origin;
     [SerializeField] private Transform _head;
@@ -105,6 +105,11 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable
 
     private void Shoot()
     {
+        if (!Loader.IsScene(Loader.SceneName.GameScene))
+        {
+            return;
+        }
+
         if (_leftFireInput.action.ReadValue<float>() > 0)
         {
             _leftNetworkHand.Gun.Shoot();
@@ -130,6 +135,13 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable
     {
         _netHP.Value = Mathf.Clamp(_netHP.Value - damage, 0, 100);
         Debug.Log("ClientId " + OwnerClientId + " HP " + _netHP.Value);
+        UpdateHealthbar();
+    }
+
+    public void ServerHeal(float amount)
+    {
+        _netHP.Value = Mathf.Clamp(_netHP.Value + amount, 0, 100);
+        Debug.Log("ClientId " + OwnerClientId + " [HEAL] HP " + _netHP.Value);
         UpdateHealthbar();
     }
 }
