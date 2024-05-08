@@ -30,6 +30,7 @@ namespace WarZombie
         {
             base.ExitState();
 
+            Manager.ServerChangeTarget();
             Manager.RightHand.SetEnabled(false);
         }
 

@@ -35451,7 +35451,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.35
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -35714,9 +35714,9 @@ SceneRoots:
   - {fileID: 599671651}
   - {fileID: 306961711}
   - {fileID: 1932200252}
-  - {fileID: 637115290}
-  - {fileID: 534390352}
   - {fileID: 1031420786}
   - {fileID: 1256261280}
   - {fileID: 593926836}
   - {fileID: 1746993088}
+  - {fileID: 637115290}
+  - {fileID: 534390352}

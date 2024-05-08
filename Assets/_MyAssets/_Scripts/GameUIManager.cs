@@ -21,4 +21,12 @@ public class GameUIManager : MonoBehaviour
         _healthbarImage.fillAmount = hp / 100f;
         _healthbarText.text = hp.ToString();
     }
+
+    void OnDestroy()
+    {
+        if (Singleton == this)
+        {
+            Singleton = null;
+        }
+    }
 }

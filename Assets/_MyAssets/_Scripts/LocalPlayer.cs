@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using IngameDebugConsole;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -64,6 +63,11 @@ public class LocalPlayer : MonoBehaviour
         }
     }
 
+    // public void SetDetectCollisions(bool value)
+    // {
+    //     var rb = this.GetComponent<Rigidbody>();
+    //     rb.detectCollisions = value;
+    // }
 
 
     #region test

@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Collections;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,9 +32,13 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
         StartCoroutine(AttackPlayerBody());
 
         UpdateHealthbar();
-        _netHP.OnValueChanged += (_, _) =>
+        _netHP.OnValueChanged += (_, val) =>
         {
             UpdateHealthbar();
+            if (val == 0)
+            {
+                VisibleNetPlayer(false);
+            }
         };
 
         // UpdatePlayerName();
@@ -49,11 +54,6 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
 
         LocalPlayer.Singleton.VisibleCharacterRenderer(false);
     }
-
-    private void Start() {
-        UpdateHealthbar();
-    }
-
 
     private void Update()
     {
@@ -128,7 +128,7 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
     {
         if (NetworkManager.Singleton.LocalClientId == OwnerClientId)
         {
-            GameUIManager.Singleton.SetHealthbarValue(HP);
+            GameUIManager.Singleton?.SetHealthbarValue(HP);
         }
     }
 
@@ -149,5 +149,46 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
         _netHP.Value = Mathf.Clamp(_netHP.Value + amount, 0, 100);
         Debug.Log("ClientId " + OwnerClientId + " [HEAL] HP " + _netHP.Value);
         UpdateHealthbar();
+    }
+
+    void VisibleNetPlayer(Transform parent, bool visible)
+    {
+        if (parent == null)
+        {
+            return;
+        }
+
+        if (parent.TryGetComponent<Renderer>(out var renderer))
+        {
+            renderer.enabled = visible;
+        }
+
+        foreach (Transform child in parent)
+        {
+            VisibleNetPlayer(child, visible);
+        }
+    }
+
+    public void VisibleNetPlayer(bool visible)
+    {
+        // if (IsOwner)
+        // {
+        //     LocalPlayer.Singleton.SetDetectCollisions(visible);
+        // }
+
+        this.transform.GetComponent<Collider>().enabled = visible;
+        VisibleNetPlayer(this.transform, visible);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void InitNetworkPlayerServerRpc()
+    {
+        _netHP.Value = 100;
+    }
+
+    public void InitNetworkPlayer()
+    {
+        InitNetworkPlayerServerRpc();
+        VisibleNetPlayer(true);
     }
 }

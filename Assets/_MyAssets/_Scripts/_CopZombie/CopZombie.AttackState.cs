@@ -31,6 +31,7 @@ namespace CopZombie
         {
             base.ExitState();
 
+            Manager.ServerChangeTarget();
             Manager.BodyCollider.enabled = true;
             Manager.RightHand.SetEnabled(false);
         }

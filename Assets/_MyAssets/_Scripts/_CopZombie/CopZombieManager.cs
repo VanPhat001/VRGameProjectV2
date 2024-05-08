@@ -142,7 +142,18 @@ public class CopZombieManager : NetworkBehaviour, IFSMManager<CopZombieFSM>, IDa
         var keys = new List<ulong>(connectedClients.Keys);
         var random = new System.Random();
         keys = keys.OrderBy(x => random.Next()).ToList();
-        Target = connectedClients[keys[0]].transform.GetChild(0).GetChild(0);
+
+        foreach (var key in keys)
+        {
+            if (connectedClients[key].TryGetComponent<NetworkPlayer>(out var netPlayer))
+            {
+                if (netPlayer.HP > 0)
+                {
+                    Target = connectedClients[key].transform.GetChild(0).GetChild(0);
+                    return;
+                }
+            }
+        }
 
         // NetPlayer <netPlayer>
         // |--> Head Container <child 0>
