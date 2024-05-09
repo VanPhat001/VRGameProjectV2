@@ -1781,6 +1781,8 @@ MonoBehaviour:
   _kickDamage: 2
   _skill1Damage: 2
   _skill2Damage: 2
+  _explosionEffectPrefab: {fileID: 4242677555918732468, guid: d76716fb43f3341759ca5d23ffa73b59,
+    type: 3}
 --- !u!1 &7642219399655373413
 GameObject:
   m_ObjectHideFlags: 0

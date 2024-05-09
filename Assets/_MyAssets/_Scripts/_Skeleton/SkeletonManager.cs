@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mono.Cecil.Cil;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class SkeletonManager : NetworkBehaviour, IFSMManager<SkeletonFSM>, IDamageable
 {
@@ -20,6 +22,7 @@ public class SkeletonManager : NetworkBehaviour, IFSMManager<SkeletonFSM>, IDama
     [SerializeField] private float _kickDamage;
     [SerializeField] private float _skill1Damage;
     [SerializeField] private float _skill2Damage;
+    [SerializeField] private GameObject _explosionEffectPrefab;
     private NetworkVariable<float> _netHP = new NetworkVariable<float>(100);
 
     public SkeletonFSM CurrentState { get; set; }
@@ -38,6 +41,7 @@ public class SkeletonManager : NetworkBehaviour, IFSMManager<SkeletonFSM>, IDama
     public float KickDamage => _kickDamage;
     public float Skill1Damage => _skill1Damage;
     public float Skill2Damage => _skill2Damage;
+    public GameObject ExplosionEffectPrefab => _explosionEffectPrefab;
 
     public Skeleton.IdleState IdleState { get; private set; }
     public Skeleton.WalkState WalkState { get; private set; }
@@ -191,5 +195,34 @@ public class SkeletonManager : NetworkBehaviour, IFSMManager<SkeletonFSM>, IDama
         // NetPlayer <netPlayer>
         // |--> Head Container <child 0>
         // |-->--> Head <child 0>
+    }
+
+    public void Skill1Explosion(Vector3 origin, Vector3 direction, int count)
+    {
+        Skill1ExplosionClientRpc(origin, direction, count);
+        PerformSkill1(origin, direction, count);
+    }
+
+    [ClientRpc]
+    public void Skill1ExplosionClientRpc(Vector3 origin, Vector3 direction, int count)
+    {
+        if (NetworkManager.Singleton.IsHost)
+        {
+            return;
+        }
+
+        PerformSkill1(origin, direction, count);
+    }
+
+    public void PerformSkill1(Vector3 origin, Vector3 direction, int count)
+    {
+        var pos = origin + direction * 0;
+        for (int i = 0; i < count; i++)
+        {
+            var effect = CFX_SpawnSystem.GetNextObject(_explosionEffectPrefab);
+            effect.transform.position = pos;
+
+            pos += direction * 3;
+        }
     }
 }

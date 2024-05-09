@@ -9,6 +9,7 @@ TagManager:
   - CopZombie
   - HealthBox
   - Skeleton
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Character
   - DontRender
   - HealthObject
-  - 
+  - SkillEffect
   - 
   - 
   - 

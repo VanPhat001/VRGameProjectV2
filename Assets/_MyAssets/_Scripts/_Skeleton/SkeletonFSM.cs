@@ -39,20 +39,22 @@ public class SkeletonFSM : BaseFSM
 
     protected void PerformAttack()
     {
-        switch (UnityEngine.Random.Range(0, 3))
-        {
-            case 0:
-                ChangeState(Manager.KickState);
-                break;
+        ChangeState(Manager.Skill1State);
 
-            case 1:
-                ChangeState(Manager.Skill1State);
-                break;
+        // switch (UnityEngine.Random.Range(0, 3))
+        // {
+        //     case 0:
+        //         ChangeState(Manager.KickState);
+        //         break;
 
-            case 2:
-                ChangeState(Manager.Skill2State);
-                break;
-        }
+        //     case 1:
+        //         ChangeState(Manager.Skill1State);
+        //         break;
+
+        //     case 2:
+        //         ChangeState(Manager.Skill2State);
+        //         break;
+        // }
     }
 
     // protected bool CanPatrol()
