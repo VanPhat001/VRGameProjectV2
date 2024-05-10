@@ -6,6 +6,25 @@ public class LobbyPlayerSpawner : MonoBehaviour
 {
     void Start()
     {
+        StartNetwork();
+
+        if (NetworkManager.Singleton.IsServer)
+        {
+            ServerDespawnAllNonPlayerNetworkObjects();
+        }
+        NetworkPlayer.Singleton?.InitNetworkPlayer();
+    }
+
+    void StartNetwork()
+    {
+        var networkConnected = NetworkManager.Singleton != null 
+            && (NetworkManager.Singleton.IsClient || NetworkManager.Singleton.IsHost);
+            
+        if (networkConnected)
+        {
+            return;
+        }
+
         if (GameData.IsClient) // client
         {
             var canStartClient = NetworkManager.Singleton.StartClient();
@@ -16,12 +35,6 @@ public class LobbyPlayerSpawner : MonoBehaviour
             var canStartHost = NetworkManager.Singleton.StartHost();
             Debug.Log(canStartHost ? "Start Host" : "Can't Start Host");
         }
-
-        if (NetworkManager.Singleton.IsServer)
-        {
-            ServerDespawnAllNonPlayerNetworkObjects();
-        }
-        NetworkPlayer.Singleton?.InitNetworkPlayer();
     }
 
     void ServerDespawnAllNonPlayerNetworkObjects()

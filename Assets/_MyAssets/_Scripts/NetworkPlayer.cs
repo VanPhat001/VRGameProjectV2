@@ -193,6 +193,7 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
     [ServerRpc(RequireOwnership = false)]
     public void InitNetworkPlayerServerRpc()
     {
+        this.transform.GetComponent<Collider>().enabled = true;
         _netHP.Value = 100;
     }
 
