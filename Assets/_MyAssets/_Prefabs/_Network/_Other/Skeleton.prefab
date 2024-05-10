@@ -1648,7 +1648,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!95 &8213230017519711909
 Animator:
@@ -1778,9 +1778,9 @@ MonoBehaviour:
     _colliders:
     - {fileID: 2885961823914969162}
   _healthbarSlider: {fileID: 8177357078156595259}
-  _kickDamage: 2
-  _skill1Damage: 2
-  _skill2Damage: 2
+  _kickDamage: 10
+  _skill1Damage: 10
+  _skill2Damage: 10
   _explosionEffectPrefab: {fileID: 4242677555918732468, guid: d76716fb43f3341759ca5d23ffa73b59,
     type: 3}
 --- !u!1 &7642219399655373413

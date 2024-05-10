@@ -2193,7 +2193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011050751358, guid: ef77372ba45b400439d547071a884266, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.288115
+      value: -13.33
       objectReference: {fileID: 0}
     - target: {fileID: 4000011050751358, guid: ef77372ba45b400439d547071a884266, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3749,6 +3749,50 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 116960952}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &117253478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 117253480}
+  - component: {fileID: 117253479}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &117253479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117253478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683ba0ff2742c4531b32ee682b9f8fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &117253480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117253478}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &128273635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11628,7 +11672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectsToPreload:
   - {fileID: 4242677555918732468, guid: d76716fb43f3341759ca5d23ffa73b59, type: 3}
-  objectsToPreloadTimes: 05000000
+  objectsToPreloadTimes: 0a000000
   hideObjectsInHierarchy: 0
   spawnAsChildren: 1
   onlyGetInactiveObjects: 1
@@ -33526,7 +33570,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1535
+    m_Bits: 3583
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -35772,5 +35816,6 @@ SceneRoots:
   - {fileID: 593926836}
   - {fileID: 1746993088}
   - {fileID: 637115290}
-  - {fileID: 534390352}
   - {fileID: 620149558}
+  - {fileID: 117253480}
+  - {fileID: 534390352}

@@ -7,7 +7,7 @@ public class ExplosiveSmoke : MonoBehaviour
     [SerializeField] float damage;
     [SerializeField] float radius;
 
-    void Start()
+    public void Explosion()
     {
         if (!NetworkManager.Singleton.IsServer)
         {
@@ -22,6 +22,5 @@ public class ExplosiveSmoke : MonoBehaviour
                 collider.GetComponent<IDamageable>()?.ServerGetHit(damage);
             }
         }
-
     }
 }

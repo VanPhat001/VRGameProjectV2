@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 8433945157084922324}
   m_Layer: 0
   m_Name: Network Right Hand
-  m_TagString: Untagged
+  m_TagString: NetworkPlayerRightHand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

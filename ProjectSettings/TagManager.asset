@@ -10,6 +10,9 @@ TagManager:
   - HealthBox
   - Skeleton
   - FxTemporaire
+  - NetworkPlayerHead
+  - NetworkPlayerLeftHand
+  - NetworkPlayerRightHand
   layers:
   - Default
   - TransparentFX

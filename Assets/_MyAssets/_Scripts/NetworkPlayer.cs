@@ -3,6 +3,7 @@ using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DemoObserver;
 
 public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
 {
@@ -138,9 +139,19 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
 
     public void ServerGetHit(float damage)
     {
-        _netHP.Value = Mathf.Clamp(_netHP.Value - damage, 0, 100);
-        Debug.Log("ClientId " + OwnerClientId + " HP " + _netHP.Value);
+        if (HP == 0)
+        {
+            return;
+        }
+
+        _netHP.Value = Mathf.Clamp(HP - damage, 0, 100);
+        Debug.Log("ClientId " + OwnerClientId + " HP " + HP);
         UpdateHealthbar();
+
+        if (HP == 0)
+        {
+            this.PostEvent(EventID.OnNetworkPlayerDeath);
+        }
     }
 
     public void ServerHeal(float amount)

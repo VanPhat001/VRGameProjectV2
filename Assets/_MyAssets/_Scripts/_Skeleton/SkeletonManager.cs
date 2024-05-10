@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mono.Cecil.Cil;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
@@ -61,19 +59,6 @@ public class SkeletonManager : NetworkBehaviour, IFSMManager<SkeletonFSM>, IDama
     public readonly int StunParam = Animator.StringToHash("stun");
     public readonly int StunTriggerParam = Animator.StringToHash("stunTrigger");
 
-    // void Awake()
-    // {
-    //     if (!NetworkManager.Singleton.IsServer)
-    //     {
-    //         return;
-    //     }
-
-    //     IdleState = new(this);
-    //     WalkState = new(this);
-    //     AttackState = new(this);
-    //     DeathState = new(this);
-    // }
-
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -107,29 +92,6 @@ public class SkeletonManager : NetworkBehaviour, IFSMManager<SkeletonFSM>, IDama
         CurrentState = IdleState;
         CurrentState.EnterState();
     }
-
-    // void Start()
-    // {
-    //     if (!NetworkManager.Singleton.IsServer)
-    //     {
-    //         return;
-    //     }
-
-    //     UpdateHealthbar();
-
-    //     RightHand.SetEnabled(false);
-    //     Agent.destination = Target.position;
-
-    //     CurrentState = IdleState;
-    //     CurrentState.EnterState();
-
-    //     // Invoke("DeathTest", 4);
-    // }
-
-    // void DeathTest()
-    // {
-    //     HP = 0;
-    // }
 
     void Update()
     {
@@ -171,11 +133,6 @@ public class SkeletonManager : NetworkBehaviour, IFSMManager<SkeletonFSM>, IDama
     public void ServerChangeTarget()
     {
         var connectedClients = Multiplayer.Singleton.ConnectedClientDict;
-
-        // var index = UnityEngine.Random.Range(0, connectedClients.Keys.Count);
-        // var netPlayer = connectedClients.ElementAt(index).Value;
-        // Target = netPlayer.transform.GetChild(0).GetChild(0);
-
         var keys = new List<ulong>(connectedClients.Keys);
         var random = new System.Random();
         keys = keys.OrderBy(x => random.Next()).ToList();
@@ -191,10 +148,6 @@ public class SkeletonManager : NetworkBehaviour, IFSMManager<SkeletonFSM>, IDama
                 }
             }
         }
-
-        // NetPlayer <netPlayer>
-        // |--> Head Container <child 0>
-        // |-->--> Head <child 0>
     }
 
     public void Skill1Explosion(Vector3 origin, Vector3 direction, int count)
@@ -221,6 +174,7 @@ public class SkeletonManager : NetworkBehaviour, IFSMManager<SkeletonFSM>, IDama
         {
             var effect = CFX_SpawnSystem.GetNextObject(_explosionEffectPrefab);
             effect.transform.position = pos;
+            effect.GetComponent<ExplosiveSmoke>()?.Explosion();
 
             pos += direction * 3;
         }

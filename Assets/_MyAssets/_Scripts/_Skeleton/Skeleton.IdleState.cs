@@ -22,7 +22,7 @@ namespace Skeleton
             base.UpdateState();
 
             _timer += Time.deltaTime;
-            if (_timer < 1.1f)
+            if (_timer < 2f)
             {
                 return;
             }

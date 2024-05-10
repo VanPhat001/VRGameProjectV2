@@ -1,4 +1,5 @@
 using System.Collections;
+using DemoObserver;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -10,7 +11,6 @@ public class GameEnemySpawner : MonoBehaviour
     [SerializeField] private GameObject _copZombiePrefab;
     [SerializeField] private GameObject _skeletonPrefab;
     [SerializeField] private GameObject _healthBoxPrefab;
-
 
     void Start()
     {
@@ -28,6 +28,7 @@ public class GameEnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         ServerSpawnSkeleton();
+        // ServerSpawnWarZombie();
     }
 
     public void ServerSpawnWarZombie()
