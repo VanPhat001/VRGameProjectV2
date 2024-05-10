@@ -5,6 +5,7 @@ public class GameUIManager : MonoBehaviour
 {
     [SerializeField] private Image _healthbarImage;
     [SerializeField] private Text _healthbarText;
+    [SerializeField] private GameObject _endGameUI;
 
     public static GameUIManager Singleton { get; private set; }
 
@@ -28,5 +29,10 @@ public class GameUIManager : MonoBehaviour
         {
             Singleton = null;
         }
+    }
+
+    public void ShowEndGameUI()
+    {
+        _endGameUI.SetActive(true);
     }
 }

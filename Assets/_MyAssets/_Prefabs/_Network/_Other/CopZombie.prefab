@@ -1721,6 +1721,7 @@ MonoBehaviour:
     _colliders:
     - {fileID: 6608779012807055968}
   _healthbarSlider: {fileID: 2980901964597004755}
+  _damageReductionRate: 40
   _attackDamage: 10
 --- !u!1 &3116732914885365333
 GameObject:

@@ -4,7 +4,6 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
-using UnityEngine.VFX;
 
 public class SkeletonManager : NetworkBehaviour, IFSMManager<SkeletonFSM>, IDamageable
 {
@@ -17,6 +16,7 @@ public class SkeletonManager : NetworkBehaviour, IFSMManager<SkeletonFSM>, IDama
     [SerializeField] private ColliderList _leftFoot;
     [SerializeField] private ColliderList _rightFoot;
     [SerializeField] private Slider _healthbarSlider;
+    [SerializeField, Range(0, 100)] private float _damageReductionRate = 0;
     [SerializeField] private float _kickDamage;
     [SerializeField] private float _skill1Damage;
     [SerializeField] private float _skill2Damage;
@@ -121,7 +121,7 @@ public class SkeletonManager : NetworkBehaviour, IFSMManager<SkeletonFSM>, IDama
 
     public void ServerGetHit(float damage)
     {
-        _netHP.Value = Mathf.Clamp(HP - damage, 0, 100);
+        _netHP.Value = Mathf.Clamp(HP - damage * (1 - _damageReductionRate / 100f), 0, 100);
         UpdateHealthbar();
     }
 

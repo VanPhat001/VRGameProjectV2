@@ -1,7 +1,7 @@
 public class WarZombieFSM : BaseFSM
 {
     public WarZombieManager Manager { get; private set; }
-    const float ATTACK_RANGE = 3;
+    const float ATTACK_RANGE = 1.3f;
     // const float FOLLOW_RANGE = 100;
 
     public WarZombieFSM(WarZombieManager manager)
@@ -41,16 +41,6 @@ public class WarZombieFSM : BaseFSM
     {
         ChangeState(Manager.AttackState);
     }
-
-    // protected bool CanPatrol()
-    // {
-    //     return false;
-    // }
-
-    // protected bool CanFollow()
-    // {
-    //     return ATTACK_RANGE < Manager.Agent.remainingDistance;
-    // }
 
     protected bool CanAttack()
     {

@@ -1,7 +1,7 @@
 public class SkeletonFSM : BaseFSM
 {
     public SkeletonManager Manager { get; private set; }
-    const float ATTACK_RANGE = 3;
+    const float ATTACK_RANGE = 1.3f;
     // const float FOLLOW_RANGE = 100;
 
     public SkeletonFSM(SkeletonManager manager)
@@ -48,8 +48,8 @@ public class SkeletonFSM : BaseFSM
                 break;
 
             case 1:
-                ChangeState(Manager.KickState);
-                // ChangeState(Manager.Skill1State);
+                // ChangeState(Manager.KickState);
+                ChangeState(Manager.Skill1State);
                 break;
 
             case 2:
@@ -57,16 +57,6 @@ public class SkeletonFSM : BaseFSM
                 break;
         }
     }
-
-    // protected bool CanPatrol()
-    // {
-    //     return false;
-    // }
-
-    // protected bool CanFollow()
-    // {
-    //     return ATTACK_RANGE < Manager.Agent.remainingDistance;
-    // }
 
     protected bool CanAttack()
     {

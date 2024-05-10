@@ -14,6 +14,7 @@ public class CopZombieManager : NetworkBehaviour, IFSMManager<CopZombieFSM>, IDa
     [SerializeField] private Collider _bodyCollider;
     [SerializeField] private ColliderList _rightHand;
     [SerializeField] private Slider _healthbarSlider;
+    [SerializeField, Range(0, 100)] private float _damageReductionRate;
     [SerializeField] private float _attackDamage;
     private NetworkVariable<float> _netHP = new NetworkVariable<float>(100);
 
@@ -35,19 +36,6 @@ public class CopZombieManager : NetworkBehaviour, IFSMManager<CopZombieFSM>, IDa
     public readonly int WalkParam = Animator.StringToHash("walk");
     public readonly int AttackParam = Animator.StringToHash("attack");
     public readonly int DeathParam = Animator.StringToHash("death");
-
-    // void Awake()
-    // {
-    //     if (!NetworkManager.Singleton.IsServer)
-    //     {
-    //         return;
-    //     }
-
-    //     IdleState = new(this);
-    //     WalkState = new(this);
-    //     AttackState = new(this);
-    //     DeathState = new(this);
-    // }
 
     public override void OnNetworkSpawn()
     {
@@ -75,29 +63,6 @@ public class CopZombieManager : NetworkBehaviour, IFSMManager<CopZombieFSM>, IDa
         CurrentState = IdleState;
         CurrentState.EnterState();
     }
-
-    // void Start()
-    // {
-    //     if (!NetworkManager.Singleton.IsServer)
-    //     {
-    //         return;
-    //     }
-
-    //     UpdateHealthbar();
-
-    //     RightHand.SetEnabled(false);
-    //     Agent.destination = Target.position;
-
-    //     CurrentState = IdleState;
-    //     CurrentState.EnterState();
-
-    //     // Invoke("DeathTest", 4);
-    // }
-
-    // void DeathTest()
-    // {
-    //     HP = 0;
-    // }
 
     void Update()
     {
@@ -127,17 +92,13 @@ public class CopZombieManager : NetworkBehaviour, IFSMManager<CopZombieFSM>, IDa
 
     public void ServerGetHit(float damage)
     {
-        _netHP.Value = Mathf.Clamp(HP - damage, 0, 100);
+        _netHP.Value = Mathf.Clamp(HP - damage * (1 - _damageReductionRate / 100f), 0, 100);
         UpdateHealthbar();
     }
 
     public void ServerChangeTarget()
     {
         var connectedClients = Multiplayer.Singleton.ConnectedClientDict;
-
-        // var index = UnityEngine.Random.Range(0, connectedClients.Keys.Count);
-        // var netPlayer = connectedClients.ElementAt(index).Value;
-        // Target = netPlayer.transform.GetChild(0).GetChild(0);
 
         var keys = new List<ulong>(connectedClients.Keys);
         var random = new System.Random();
@@ -154,9 +115,5 @@ public class CopZombieManager : NetworkBehaviour, IFSMManager<CopZombieFSM>, IDa
                 }
             }
         }
-
-        // NetPlayer <netPlayer>
-        // |--> Head Container <child 0>
-        // |-->--> Head <child 0>
     }
 }

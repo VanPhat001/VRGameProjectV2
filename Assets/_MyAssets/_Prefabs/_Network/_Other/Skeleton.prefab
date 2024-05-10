@@ -1778,6 +1778,7 @@ MonoBehaviour:
     _colliders:
     - {fileID: 2885961823914969162}
   _healthbarSlider: {fileID: 8177357078156595259}
+  _damageReductionRate: 30
   _kickDamage: 10
   _skill1Damage: 10
   _skill2Damage: 10

@@ -1,3 +1,4 @@
+using DemoObserver;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -26,6 +27,8 @@ namespace Skeleton
 
             Manager.Animator.SetBool(Manager.DeathParam, true);
             _timer = 0;
+
+            Manager.PostEvent(EventID.OnZombieDeath);
         }
 
         public override void UpdateState()
