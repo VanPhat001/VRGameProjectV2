@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8927961223974705993}
   - component: {fileID: 3139414250579761053}
   - component: {fileID: 3152332625613175451}
-  - component: {fileID: 385317995937569645}
   - component: {fileID: 4234759945989348314}
+  - component: {fileID: 385317995937569645}
   m_Layer: 8
   m_Name: Network Player
   m_TagString: NetworkPlayer
@@ -201,6 +201,29 @@ MonoBehaviour:
     type: 3}
   _audioSource: {fileID: 5461788456765831241}
   _fireSound: {fileID: 0}
+--- !u!136 &4234759945989348314
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248185646777370436}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.85, z: 0}
 --- !u!114 &385317995937569645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +253,32 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
+  _leftReloadInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Reload Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 3eb8a026-a29a-496e-adc6-66a2850b2407
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  _leftAddAmmoInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Add Ammo Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 4a5f1a33-308b-41b5-8e26-da99a5ee6564
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 2766633494064083565, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
   _rightFireInput:
     m_UseReference: 1
     m_Action:
@@ -243,26 +292,29 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
---- !u!136 &4234759945989348314
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 248185646777370436}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3
-  m_Height: 1.7
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.85, z: 0}
+  _rightReloadInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Reload Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: a2aad84a-ece5-4a4f-a4d1-7e27241151e7
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  _rightAddAmmoInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Add Ammo Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 4fe8b995-e771-406f-8f87-452c4825dc90
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -8441704718257383117, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}

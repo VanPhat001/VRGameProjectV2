@@ -7,21 +7,34 @@ using DemoObserver;
 
 public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
 {
+    [Header("Network Player Body Tranforms")]
     [SerializeField] private Transform _origin;
     [SerializeField] private Transform _head;
     [SerializeField] private Transform _leftHand;
     [SerializeField] private Transform _rightHand;
+
+    [Header("Left Hand Input Action Property")]
     [SerializeField] private InputActionProperty _leftFireInput;
+    [SerializeField] private InputActionProperty _leftReloadInput;
+    [SerializeField] private InputActionProperty _leftAddAmmoInput;
+
+    [Header("Rigth Hand Input Action Property")]
     [SerializeField] private InputActionProperty _rightFireInput;
+    [SerializeField] private InputActionProperty _rightReloadInput;
+    [SerializeField] private InputActionProperty _rightAddAmmoInput;
+
     private NetworkVariable<float> _netHP = new NetworkVariable<float>(100);
     private NetworkVariable<FixedString128Bytes> _netPlayerName = new NetworkVariable<FixedString128Bytes>("[TEST] PlayerName", writePerm: NetworkVariableWritePermission.Owner);
 
-    public float HP => _netHP.Value;
-
     private bool _isPlayerReady = false;
+    private bool _isPlayerStayInWeaponPack = false;
     private NetworkHand _leftNetworkHand;
     private NetworkHand _rightNetworkHand;
     private NetworkHead _networkHead;
+
+    public float HP => _netHP.Value;
+    public bool IsPlayerStayInWeaponPack { get => _isPlayerStayInWeaponPack; set => _isPlayerStayInWeaponPack = value; }
+    
 
     public static NetworkPlayer Singleton { get; private set; }
 
@@ -64,6 +77,8 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
 
         SyncPlayerTransform();
         Shoot();
+        Reload();
+        AddAmmo();
     }
 
     private void SyncPlayerTransform()
@@ -121,6 +136,45 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
         if (_rightFireInput.action.ReadValue<float>() > 0)
         {
             _rightNetworkHand.Gun.Shoot();
+        }
+    }
+
+    private void Reload()
+    {
+        if (!Loader.IsScene(Loader.SceneName.GameScene) || HP <= 0)
+        {
+            return;
+        }
+
+        if (_leftReloadInput.action.ReadValue<float>() > 0)
+        {
+            _leftNetworkHand.Gun.Reload();
+        }
+
+        if (_rightReloadInput.action.ReadValue<float>() > 0)
+        {
+            _rightNetworkHand.Gun.Reload();
+        }
+    }
+
+    private void AddAmmo()
+    {
+        if (!Loader.IsScene(Loader.SceneName.GameScene) || HP <= 0)
+        {
+            return;
+        }
+
+        if (!IsPlayerStayInWeaponPack)
+        {
+            return;
+        }
+
+        var isLeftButtonPressed = _leftAddAmmoInput.action.ReadValue<float>() > 0;
+        var isRightButtonPressed = _rightAddAmmoInput.action.ReadValue<float>() > 0;
+        if (isLeftButtonPressed || isRightButtonPressed)
+        {
+            _leftNetworkHand.Gun.AddAmmo();
+            _rightNetworkHand.Gun.AddAmmo();
         }
     }
 
@@ -201,5 +255,8 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
     {
         InitNetworkPlayerServerRpc();
         VisibleNetPlayer(true);
+        _leftNetworkHand?.Gun?.Init();
+        _rightNetworkHand?.Gun?.Init();
+        IsPlayerStayInWeaponPack = false;
     }
 }

@@ -13,6 +13,7 @@ TagManager:
   - NetworkPlayerHead
   - NetworkPlayerLeftHand
   - NetworkPlayerRightHand
+  - AmmoPack
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - DontRender
   - HealthObject
   - SkillEffect
-  - 
+  - AmmoPack
   - 
   - 
   - 

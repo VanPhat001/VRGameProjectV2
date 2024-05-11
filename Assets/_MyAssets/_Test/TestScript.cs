@@ -1,9 +1,14 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TestScript : MonoBehaviour
 {
     public CFX_SpawnSystem cfx_SpawnSystem;
     public GameObject effectPrefab;
+
+    public InputActionProperty xbutton;
+    public InputActionProperty ybutton;
 
     void Start()
     {
@@ -12,6 +17,27 @@ public class TestScript : MonoBehaviour
 
     float _timer = .4f;
     void Update()
+    {
+        SpawnEffect();
+        TestButton();
+    }
+
+    private void TestButton()
+    {
+        
+        // Debug.Log(xbutton.action.ReadValue<float>() > 0.4f);
+        // if (xbutton.action.ReadValue<float>() > 0)
+        // {
+        //     Debug.Log("x button");
+        // }
+
+        // if (ybutton.action.ReadValue<float>() > 0)
+        // {
+        //     Debug.Log("y button");
+        // }
+    }
+
+    void SpawnEffect()
     {
         if (!CFX_SpawnSystem.AllObjectsLoaded)
         {

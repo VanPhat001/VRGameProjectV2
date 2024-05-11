@@ -11,11 +11,24 @@ public class Pistol : MonoBehaviour, IGun
     [SerializeField] private int _ammoRemain;
     [SerializeField] private int _ammoAvailable;
     [SerializeField] private int _ammoReloadNumber;
+    [SerializeField] private int _ammoAddAmount;
+    [SerializeField] private int _ammoAddTime;
     private float _ammoFireTimer = 0;
     private float _reloadTimer = 2f;
     private bool _isReloading = false;
+    private bool _isAddAmmo = false;
+
+    private int m_ammoRemain;
+    private int m_ammoAvailable;
+
 
     public float ReloadTimer => _reloadTimer;
+
+    void Start()
+    {
+        m_ammoRemain = _ammoRemain;
+        m_ammoAvailable = _ammoAvailable;
+    }
 
     void Update()
     {
@@ -26,6 +39,11 @@ public class Pistol : MonoBehaviour, IGun
         }
     }
 
+    public void Init()
+    {
+        _ammoRemain = m_ammoRemain;
+        _ammoAvailable = m_ammoAvailable;
+    }
 
     public bool Shoot()
     {
@@ -34,9 +52,6 @@ public class Pistol : MonoBehaviour, IGun
             return false;
         }
 
-        ////////////
-        ///shoot///
-        ///////////
         _ammoFireTimer = _ammoRate;
         _ammoAvailable--;
         NetworkCommunication.Singleton.SpawnBulletServerRpc(
@@ -55,11 +70,16 @@ public class Pistol : MonoBehaviour, IGun
 
     public bool CanShoot()
     {
-        return !_isReloading && _ammoFireTimer <= 0 && _ammoAvailable > 0;
+        return !_isAddAmmo && !_isReloading && _ammoFireTimer <= 0 && _ammoAvailable > 0;
     }
 
     public void Reload()
     {
+        if (_isReloading || _isAddAmmo)
+        {
+            return;
+        }
+
         StartCoroutine(ReloadCoroutine());
     }
 
@@ -77,5 +97,30 @@ public class Pistol : MonoBehaviour, IGun
 
         _reloadTimer = 0;
         _isReloading = false;
+    }
+
+    public void AddAmmo(int amount = -1)
+    {
+        if (_isReloading || _isAddAmmo)
+        {
+            return;
+        }
+        Debug.Log("add ammo....");
+
+        if (amount < 0)
+        {
+            amount = _ammoAddAmount;
+        }
+
+        StartCoroutine(AddAmmoCoroutine(amount));
+    }
+
+    IEnumerator AddAmmoCoroutine(int amount)
+    {
+        _isAddAmmo = true;
+        yield return new WaitForSeconds(_ammoAddTime);
+
+        _ammoRemain += amount;
+        _isAddAmmo = false;
     }
 }

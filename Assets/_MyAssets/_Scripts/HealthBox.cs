@@ -42,6 +42,11 @@ public class HealthBox : NetworkBehaviour
             return;
         }
 
+        if (!other.gameObject.CompareTag("NetworkPlayer"))
+        {
+            return;
+        }
+
         var healable = other.transform.GetComponent<IHealable>();
         healable?.ServerHeal(_healthAmount);
 
