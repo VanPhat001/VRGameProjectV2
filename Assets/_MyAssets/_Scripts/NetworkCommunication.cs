@@ -6,7 +6,7 @@ public class NetworkCommunication : NetworkBehaviour {
 
     [SerializeField] private GameObject _ammoPrefab;
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip _fireSound;
+    // [SerializeField] private AudioClip _fireSound;
 
     public override void OnNetworkSpawn()
     {
@@ -25,15 +25,12 @@ public class NetworkCommunication : NetworkBehaviour {
         bullet.GetComponent<NetworkObject>().Spawn();
         bullet.GetComponent<Bullet>().ServerInit(origin, rotation, velocity);
 
-        PlayBulletFireSoundClientRpc();
+        // PlayBulletFireSoundClientRpc();
     }
 
-    [ClientRpc]
-    public void PlayBulletFireSoundClientRpc()
-    {
-        _audioSource.PlayOneShot(_fireSound);
-    }
-
-
-
+    // [ClientRpc]
+    // public void PlayBulletFireSoundClientRpc()
+    // {
+    //     _audioSource.PlayOneShot(_fireSound);
+    // }
 }

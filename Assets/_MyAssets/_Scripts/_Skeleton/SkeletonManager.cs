@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
@@ -169,14 +170,32 @@ public class SkeletonManager : NetworkBehaviour, IFSMManager<SkeletonFSM>, IDama
 
     public void PerformSkill1(Vector3 origin, Vector3 direction, int count)
     {
-        var pos = origin + direction * 0;
-        for (int i = 0; i < count; i++)
+        // var pos = origin;
+        // for (int i = 0; i < count; i++)
+        // {
+        //     var effect = CFX_SpawnSystem.GetNextObject(_explosionEffectPrefab);
+        //     effect.transform.position = pos;
+        //     effect.GetComponent<ExplosiveSmoke>()?.Explosion();
+
+        //     pos += direction * 3;
+        // }
+
+        StartCoroutine(PerformSkill1Coroutine(origin, count));
+        IEnumerator PerformSkill1Coroutine(Vector3 pos, int count)
         {
+            if (count == 0)
+            {
+                yield break;
+            }
+
             var effect = CFX_SpawnSystem.GetNextObject(_explosionEffectPrefab);
             effect.transform.position = pos;
             effect.GetComponent<ExplosiveSmoke>()?.Explosion();
 
-            pos += direction * 3;
+            yield return new WaitForSeconds(.2f);
+
+            StartCoroutine(PerformSkill1Coroutine(pos + direction * 3, count - 1));
         }
+
     }
 }

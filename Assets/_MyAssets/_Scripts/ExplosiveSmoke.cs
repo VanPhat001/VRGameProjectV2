@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ExplosiveSmoke : MonoBehaviour
 {
-    [SerializeField] float damage;
-    [SerializeField] float radius;
+    [SerializeField] private float _damage;
+    [SerializeField] private float _radius;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _explosionSound;
 
     public void Explosion()
     {
@@ -14,13 +16,20 @@ public class ExplosiveSmoke : MonoBehaviour
             return;
         }
 
-        var colliders = Physics.OverlapSphere(this.transform.position, radius);
+        PlaySound();
+
+        var colliders = Physics.OverlapSphere(this.transform.position, _radius);
         foreach (var collider in colliders)
         {
             if (collider.gameObject.CompareTag("NetworkPlayer"))
             {
-                collider.GetComponent<IDamageable>()?.ServerGetHit(damage);
+                collider.GetComponent<IDamageable>()?.ServerGetHit(_damage);
             }
         }
+    }
+
+    void PlaySound()
+    {
+        _audioSource.PlayOneShot(_explosionSound);
     }
 }

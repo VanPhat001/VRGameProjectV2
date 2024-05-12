@@ -6,6 +6,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private Image _healthbarImage;
     [SerializeField] private Text _healthbarText;
     [SerializeField] private GameObject _endGameUI;
+    [SerializeField] private GameObject _addAmmoUI;
 
     public static GameUIManager Singleton { get; private set; }
 
@@ -31,8 +32,13 @@ public class GameUIManager : MonoBehaviour
         }
     }
 
-    public void ShowEndGameUI()
+    public void ShowEndGameUI(bool active = true)
     {
-        _endGameUI.SetActive(true);
+        _endGameUI.SetActive(active);
+    }
+
+    public void ShowAddAmmoUI(bool active = true)
+    {
+        _addAmmoUI.SetActive(active);
     }
 }

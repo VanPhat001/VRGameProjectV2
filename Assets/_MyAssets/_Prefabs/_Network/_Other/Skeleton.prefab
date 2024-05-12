@@ -1683,7 +1683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1397110576
+  GlobalObjectIdHash: 3684536057
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1779,9 +1779,9 @@ MonoBehaviour:
     - {fileID: 2885961823914969162}
   _healthbarSlider: {fileID: 8177357078156595259}
   _damageReductionRate: 30
-  _kickDamage: 10
-  _skill1Damage: 10
-  _skill2Damage: 10
+  _kickDamage: 6
+  _skill1Damage: 6
+  _skill2Damage: 6
   _explosionEffectPrefab: {fileID: 4242677555918732468, guid: d76716fb43f3341759ca5d23ffa73b59,
     type: 3}
 --- !u!1 &7642219399655373413

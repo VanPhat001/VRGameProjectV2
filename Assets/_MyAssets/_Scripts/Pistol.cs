@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Pistol : MonoBehaviour, IGun
@@ -13,21 +14,35 @@ public class Pistol : MonoBehaviour, IGun
     [SerializeField] private int _ammoReloadNumber;
     [SerializeField] private int _ammoAddAmount;
     [SerializeField] private int _ammoAddTime;
+
+    [Header("UI")]
+    [SerializeField] private TMP_Text _statusText;
+
+    [Header("Sound")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _fireSound;
+    [SerializeField] private AudioClip _firingFailureSound;
+
     private float _ammoFireTimer = 0;
     private float _reloadTimer = 2f;
     private bool _isReloading = false;
     private bool _isAddAmmo = false;
+    private Coroutine _playSoundCoroutine = null;
 
     private int m_ammoRemain;
     private int m_ammoAvailable;
 
 
+    public int AmmoRemain => _ammoRemain;
+    public int AmmoAvailable => _ammoAvailable;
     public float ReloadTimer => _reloadTimer;
 
     void Start()
     {
         m_ammoRemain = _ammoRemain;
         m_ammoAvailable = _ammoAvailable;
+
+        UpdateStatusText();
     }
 
     void Update()
@@ -43,12 +58,14 @@ public class Pistol : MonoBehaviour, IGun
     {
         _ammoRemain = m_ammoRemain;
         _ammoAvailable = m_ammoAvailable;
+        UpdateStatusText();
     }
 
     public bool Shoot()
     {
         if (!CanShoot())
         {
+            PlayFiringFailureSound();
             return false;
         }
 
@@ -59,6 +76,7 @@ public class Pistol : MonoBehaviour, IGun
             _firePoint.rotation,
             _firePoint.forward.normalized * _ammoSpeed
         );
+        PlayFireSound();
 
         if (_ammoAvailable <= 0 && _ammoRemain > 0)
         {
@@ -97,6 +115,8 @@ public class Pistol : MonoBehaviour, IGun
 
         _reloadTimer = 0;
         _isReloading = false;
+
+        UpdateStatusText();
     }
 
     public void AddAmmo(int amount = -1)
@@ -105,7 +125,6 @@ public class Pistol : MonoBehaviour, IGun
         {
             return;
         }
-        Debug.Log("add ammo....");
 
         if (amount < 0)
         {
@@ -118,9 +137,46 @@ public class Pistol : MonoBehaviour, IGun
     IEnumerator AddAmmoCoroutine(int amount)
     {
         _isAddAmmo = true;
+        GameUIManager.Singleton.ShowAddAmmoUI();
+        UpdateStatusText();
         yield return new WaitForSeconds(_ammoAddTime);
 
         _ammoRemain += amount;
         _isAddAmmo = false;
+        GameUIManager.Singleton.ShowAddAmmoUI(false);
+        UpdateStatusText();
+    }
+
+    void PlayFireSound()
+    {
+        _audioSource.PlayOneShot(_fireSound);
+    }
+
+    void PlayFiringFailureSound()
+    {
+        if (_playSoundCoroutine != null)
+        {
+            return;
+        }
+
+        _playSoundCoroutine = StartCoroutine(PlayFiringFailureSoundCoroutine());
+    }
+
+    IEnumerator PlayFiringFailureSoundCoroutine()
+    {
+        _audioSource.PlayOneShot(_firingFailureSound);
+        yield return new WaitForSeconds(.3f);
+
+        _playSoundCoroutine = null;
+    }
+
+    public void UpdateStatusText()
+    {
+        SetStatusText($"{AmmoAvailable} / {AmmoRemain}");
+    }
+
+    void SetStatusText(string text)
+    {
+        _statusText.text = text;
     }
 }

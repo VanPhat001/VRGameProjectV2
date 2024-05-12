@@ -34,7 +34,7 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
 
     public float HP => _netHP.Value;
     public bool IsPlayerStayInWeaponPack { get => _isPlayerStayInWeaponPack; set => _isPlayerStayInWeaponPack = value; }
-    
+
 
     public static NetworkPlayer Singleton { get; private set; }
 
@@ -131,11 +131,13 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
         if (_leftFireInput.action.ReadValue<float>() > 0)
         {
             _leftNetworkHand.Gun.Shoot();
+            _leftNetworkHand?.Gun?.UpdateStatusText();
         }
 
         if (_rightFireInput.action.ReadValue<float>() > 0)
         {
             _rightNetworkHand.Gun.Shoot();
+            _rightNetworkHand?.Gun?.UpdateStatusText();
         }
     }
 
@@ -249,14 +251,26 @@ public class NetworkPlayer : NetworkBehaviour, IDamageable, IHealable
     {
         this.transform.GetComponent<Collider>().enabled = true;
         _netHP.Value = 100;
+
+        InitNetworkPlayerClientRpc();
+    }
+
+    [ClientRpc]
+    public void InitNetworkPlayerClientRpc()
+    {
+        VisibleNetPlayer(true);
+        _leftNetworkHand?.Gun?.UpdateStatusText();
+        _rightNetworkHand?.Gun?.UpdateStatusText();
     }
 
     public void InitNetworkPlayer()
     {
         InitNetworkPlayerServerRpc();
         VisibleNetPlayer(true);
+
         _leftNetworkHand?.Gun?.Init();
         _rightNetworkHand?.Gun?.Init();
+
         IsPlayerStayInWeaponPack = false;
     }
 }
