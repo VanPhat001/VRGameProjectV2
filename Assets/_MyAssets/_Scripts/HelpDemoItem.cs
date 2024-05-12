@@ -4,7 +4,7 @@ public class HelpDemoItem : MonoBehaviour
 {
     [SerializeField] private GameObject _zombiePrefab;
     [SerializeField] private string _name;
-    [SerializeField] private string _description;
+    [SerializeField, TextArea(5, 30)] private string _description;
 
     public GameObject ZombiePrefab => _zombiePrefab;
     public string Name => _name;

@@ -7,7 +7,7 @@ public class HealthBox : NetworkBehaviour
     [SerializeField] private float _healthAmount;
     [SerializeField] private Collider _collider;
     private NetworkVariable<bool> _netActive = new NetworkVariable<bool>(true);
-    private const float TRIGGER_RATE = 20;
+    private const float TRIGGER_RATE = 30;
 
     public override void OnNetworkSpawn()
     {
