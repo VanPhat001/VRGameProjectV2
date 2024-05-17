@@ -2333,7 +2333,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -12658,24 +12658,27 @@ MonoBehaviour:
   - {fileID: 334411814}
   _attackWaves:
   - WarZombieCount: 0
-    CopZombieCount: 0
-    SkeletonCount: 1
+    CopZombieCount: 1
+    SkeletonCount: 0
   - WarZombieCount: 1
     CopZombieCount: 0
     SkeletonCount: 0
+  - WarZombieCount: 0
+    CopZombieCount: 0
+    SkeletonCount: 1
   - WarZombieCount: 1
     CopZombieCount: 1
     SkeletonCount: 0
   - WarZombieCount: 2
     CopZombieCount: 2
     SkeletonCount: 0
-  - WarZombieCount: 1
-    CopZombieCount: 1
+  - WarZombieCount: 0
+    CopZombieCount: 0
     SkeletonCount: 1
   - WarZombieCount: 3
     CopZombieCount: 1
     SkeletonCount: 1
-  - WarZombieCount: 5
+  - WarZombieCount: 6
     CopZombieCount: 0
     SkeletonCount: 0
   - WarZombieCount: 0
